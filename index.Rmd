@@ -1,0 +1,53 @@
+---
+title       : Data Product Presentation 
+subtitle    : Iris Species Prediction
+author      : Kevin 
+job         : Use Shiny to enable interactive web pages
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+## Project Overview
+
+1. Use Shiny to realise interactive online data product
+1. This Shiny application is Iris Species Prediction based on user inputs
+1. Inputs: user can specify four features of Iris: `r names(iris)[1:4]` via web page input boxes (via ui.R)
+1. Outputs: the predicted Iris Species (`r unique(iris$Species)`) is shown (via ui.R), which is reactive to whatever the plant feature value inputs
+1. The machine learning random forest algorithm is used to process ui inputs at background to produce prediction results (via server.R)
+1. The iris R dataset package is employed for this data product for simplicity
+1. This pitch is done in Slidify
+
+--- .class #id 
+
+## Iris Data Summary
+1. Following is the statistical summary of iris dataset using R
+1. User inputs are bounded by the minimum and maximum values of each feature, and the default values are set to the median of each feature
+```{r cache=T}
+knitr::kable(summary(iris))
+```
+
+---
+
+## Iris Data Visualization     
+1. Correlations between iris features `r names(iris)[-5]` and iris species `r unique(iris$Species)` are shown below
+1. It can be seen all these features are relevant and can be used as predictors for ML algorithm
+
+```{r, cache=T, echo=F}
+library("knitr")
+library(caret)
+#hist(iris$Sepal.Length)
+#qplot(Sepal.Length,Species,colour=Sepal.Width, data=iris)
+featurePlot(x=iris[,c(1:5)],y=iris$Species,plot="pairs")
+```
+
+---
+
+## Conclusions
+1. Shiny is a powerful tool to quickly enable interactive data products online
+1. Users of Shiny need little or none knowledge of html and css to make web pages
+1. Two key parts of Shiny: GUI is implemented by ui.R whereas service logics are done by server.R at background. Most efforts focus on server.R 
+1. People can take advantage of Shiny to present and publish their data products to a mass population, for knowledge sharing and reproducible research

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Product Presentation</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Data Product Presentation">
+  <meta name="author" content="Kevin">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Data Product Presentation</h1>
+    <h2>Iris Species Prediction</h2>
+    <p>Kevin<br/>Use Shiny to enable interactive web pages</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Project Overview</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Use Shiny to realise interactive online data product</li>
+<li>This Shiny application is Iris Species Prediction based on user inputs</li>
+<li>Inputs: user can specify four features of Iris: Sepal.Length, Sepal.Width, Petal.Length, Petal.Width via web page input boxes (via ui.R)</li>
+<li>Outputs: the predicted Iris Species (setosa, versicolor, virginica) is shown (via ui.R), which is reactive to whatever the plant feature value inputs</li>
+<li>The machine learning random forest algorithm is used to process ui inputs at background to produce prediction results (via server.R)</li>
+<li>The iris R dataset package is employed for this data product for simplicity</li>
+<li>This pitch is done in Slidify</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Iris Data Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Following is the statistical summary of iris dataset using R</li>
+<li>User inputs are bounded by the minimum and maximum values of each feature, and the default values are set to the median of each feature</li>
+</ol>
+
+<pre><code class="r">knitr::kable(summary(iris))
+</code></pre>
+
+<table><thead>
+<tr>
+<th align="left"></th>
+<th align="left">Sepal.Length</th>
+<th align="left">Sepal.Width</th>
+<th align="left">Petal.Length</th>
+<th align="left">Petal.Width</th>
+<th align="left">Species</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left"></td>
+<td align="left">Min.   :4.300</td>
+<td align="left">Min.   :2.000</td>
+<td align="left">Min.   :1.000</td>
+<td align="left">Min.   :0.100</td>
+<td align="left">setosa    :50</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">1st Qu.:5.100</td>
+<td align="left">1st Qu.:2.800</td>
+<td align="left">1st Qu.:1.600</td>
+<td align="left">1st Qu.:0.300</td>
+<td align="left">versicolor:50</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Median :5.800</td>
+<td align="left">Median :3.000</td>
+<td align="left">Median :4.350</td>
+<td align="left">Median :1.300</td>
+<td align="left">virginica :50</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Mean   :5.843</td>
+<td align="left">Mean   :3.057</td>
+<td align="left">Mean   :3.758</td>
+<td align="left">Mean   :1.199</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">3rd Qu.:6.400</td>
+<td align="left">3rd Qu.:3.300</td>
+<td align="left">3rd Qu.:5.100</td>
+<td align="left">3rd Qu.:1.800</td>
+<td align="left">NA</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left">Max.   :7.900</td>
+<td align="left">Max.   :4.400</td>
+<td align="left">Max.   :6.900</td>
+<td align="left">Max.   :2.500</td>
+<td align="left">NA</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Iris Data Visualization</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Correlations between iris features Sepal.Length, Sepal.Width, Petal.Length, Petal.Width and iris species setosa, versicolor, virginica are shown below</li>
+<li>It can be seen all these features are relevant and can be used as predictors for ML algorithm</li>
+</ol>
+
+<p><img src="assets/fig/unnamed-chunk-2-1.png" alt="plot of chunk unnamed-chunk-2"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Conclusions</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>Shiny is a powerful tool to quickly enable interactive data products online</li>
+<li>Users of Shiny need little or none knowledge of html and css to make web pages</li>
+<li>Two key parts of Shiny: GUI is implemented by ui.R whereas service logics are done by server.R at background. Most efforts focus on server.R </li>
+<li>People can take advantage of Shiny to present and publish their data products to a mass population, for knowledge sharing and reproducible research</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Project Overview'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Iris Data Summary'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Iris Data Visualization'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Conclusions'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
